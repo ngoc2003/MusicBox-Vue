@@ -22,7 +22,6 @@
 import HeadingSection from '../../components/HeadingSection.vue'
 import ConnectionInstance from '../../api/main'
 import { ref, onMounted } from 'vue'
-import { useUserStore } from '../../stores/user'
 import TrackPlay from '../../components/TrackPlay.vue'
 
 interface Short_ArtistType {
@@ -83,13 +82,7 @@ interface RecommendTrackType {
 const data = ref<RecommendTrackType[]>([])
 
 onMounted(async () => {
-  const user = useUserStore()
-  if (!user.user.name) return
-  try {
-    const response = await ConnectionInstance.get('/your-top-tracks')
-    data.value = response.data
-  } catch (err) {
-    console.log(err)
-  }
+  const response = await ConnectionInstance.get('/your-top-tracks')
+  data.value = response.data
 })
 </script>

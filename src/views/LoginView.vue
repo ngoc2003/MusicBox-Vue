@@ -12,10 +12,27 @@
 
 <script setup lang="ts">
 import ConnectionInstance from '../api/main'
+import { useUserStore } from '../stores/user'
+
+const user = useUserStore()
+
+window.onbeforeunload = function () {
+  console.log('Page is being unloaded')
+}
 
 const handleLogin = () => {
   ConnectionInstance.get('/login').then((response) => {
-    window.location.replace(response.data)
+    let popup = window.open(
+      `${response.data}&show_dialog=true`,
+      'Login with Spotify',
+      'width=800,height=600'
+    )
+
+    window.addEventListener('message', (event) => {
+      if (event.source === popup) {
+        user.updateUser(event.data)
+      }
+    })
   })
 }
 </script>

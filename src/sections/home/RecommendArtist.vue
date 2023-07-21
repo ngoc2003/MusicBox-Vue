@@ -37,7 +37,6 @@ import PlayIcon from 'vue-material-design-icons/Play.vue'
 import HeadingSection from '../../components/HeadingSection.vue'
 import ConnectionInstance from '../../api/main'
 import { ref, onMounted } from 'vue'
-import { useUserStore } from '../../stores/user'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -66,13 +65,7 @@ interface RecommendArtistType {
 const data = ref<RecommendArtistType[]>([])
 
 onMounted(async () => {
-  const user = useUserStore()
-  if (!user.user.name) return
-  try {
-    const response = await ConnectionInstance.get('/your-top-artists')
-    data.value = response.data
-  } catch (err) {
-    console.log(err)
-  }
+  const response = await ConnectionInstance.get('/your-top-artists')
+  data.value = response.data
 })
 </script>

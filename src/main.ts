@@ -7,7 +7,6 @@ import router from './router'
 
 import './assets/tailwind.css'
 import './assets/main.css'
-import ConnectionInstance from './api/main'
 
 const app = createApp(App)
 

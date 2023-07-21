@@ -1,6 +1,5 @@
 <template>
-  <HeadingSection :title="'Feature playlist'" />
-
+  <HeadingSection :title="'Top'" />
   <div v-if="!data?.length"></div>
   <div v-else class="grid grid-cols-4 gap-5">
     <div
@@ -27,37 +26,24 @@
 </template>
 
 <script setup lang="ts">
-import PlayIcon from 'vue-material-design-icons/Play.vue'
-import HeadingSection from '../../components/HeadingSection.vue'
-import ConnectionInstance from '../../api/main'
 import { ref, onMounted } from 'vue'
-import { useUserStore } from '../../stores/user'
 import { useRouter } from 'vue-router'
+import ConnectionInstance from '../api/main'
+import HeadingSection from '../components/HeadingSection.vue'
 
 const router = useRouter()
 
-interface FeaturePlaylistType {
+interface TopTracksType {
   collaborative: boolean
   description: string
-  external_urls: { spotify: string }
+  external_urls: {
+    spotify: string
+  }
   href: string
   id: string
-  images: [
-    {
-      height: number | null
-      url: string
-      width: number | null
-    }
-  ]
+  images: { height: number | null; width: number | null; url: string }[]
   name: string
-  owner: {
-    display_name: string
-    external_urls: { spotify: string }
-    href: string
-    id: string
-    type: string
-    uri: string
-  }
+  owner: { display_name: string; external_urls: { spotify: string } }
   primary_color: null
   public: null
   snapshot_id: string
@@ -65,14 +51,15 @@ interface FeaturePlaylistType {
   type: string
   uri: string
 }
-const data = ref<FeaturePlaylistType[]>([])
 
-onMounted(async () => {
-  const response = await ConnectionInstance.get('/feature-playlist', {
-    params: {
-      country: 'VN'
-    }
-  })
+const data = ref<TopTracksType[]>([])
+
+const handleFetchData = async () => {
+  const response = await ConnectionInstance.get('/top')
   data.value = response.data
+}
+
+onMounted(() => {
+  handleFetchData()
 })
 </script>
