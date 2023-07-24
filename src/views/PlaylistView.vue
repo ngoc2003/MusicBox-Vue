@@ -23,6 +23,7 @@
           v-for="(item, index) in data.tracks.items"
           :key="item.track.id"
           :index="index + 1"
+          :preview_image="item.track.album.images[0].url"
           :name="item.track.name"
           :duration_ms="item.track.duration_ms"
           :preview_url="item.track.preview_url"

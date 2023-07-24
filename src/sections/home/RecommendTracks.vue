@@ -11,6 +11,7 @@
       :name="item.name"
       :duration_ms="item.duration_ms"
       :preview_url="item.preview_url"
+      :preview_image="item.album.images[0].url"
       :id="item.id"
       :artist_name="item.artists.map((artist) => ({ id: artist.id, name: artist.name }))"
       :showArtist="true"

@@ -10,8 +10,9 @@
     <p class="w-4">{{ props.index }}</p>
     <div class="flex items-center flex-1">
       <img
+        v-if="props.preview_image"
         @click="handleActiveTrack"
-        src="../assets/logo.svg"
+        :src="props.preview_image"
         class="ml-4 w-10 h-10 object-cover rounded-sm"
         alt=""
       />
@@ -47,6 +48,7 @@ import { useTrackStore } from '../stores/track'
 interface Props {
   index: number
   preview_url: string
+  preview_image?: string
   name: string
   duration_ms: number
   id: string
