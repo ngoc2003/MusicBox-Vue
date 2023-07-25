@@ -3,7 +3,7 @@
     <div class="px-4">
       <span class="flex items-end cursor-pointer" @click="router.push('/')">
         <img src="../assets/logo.svg" alt="" class="mr-2 rotate-6" />
-        <span class="text-lg font-semibold">Musicbox</span>
+        <span class="text-lg font-semibold text-primary">Musicbox</span>
       </span>
       <div class="mt-8 text-white">
         <RouterLink
