@@ -4,3 +4,13 @@ body {
 .wrapper {
   @apply p-8;
 }
+* {
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+  @apply bg-dark-light bg-opacity-10 w-2;
+}
+*::-webkit-scrollbar-thumb {
+  @apply bg-primary;
+  background-clip: padding-box;
+}

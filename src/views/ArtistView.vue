@@ -45,12 +45,14 @@
       />
     </div>
   </div>
+  <RelatedArtistView />
 </template>
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import ConnectionInstance from '../api/main'
 import TrackPlay from '../components/TrackPlay.vue'
+import RelatedArtistView from '../sections/artist/RelatedArtist.vue'
 import { ref, watch, onMounted } from 'vue'
 
 const route = useRoute()
@@ -109,7 +111,7 @@ const data = ref<Data | null>(null)
 
 const handleFetchData = async () => {
   if (route.params.artistId) {
-    const response = await ConnectionInstance.get('/artist-albums', {
+    const response = await ConnectionInstance.get('/artist/albums', {
       params: { artistId: artistId.value }
     })
     data.value = response.data
@@ -120,14 +122,14 @@ const handleFetchData = async () => {
 }
 const handleFollowArtist = async () => {
   isFollowed.value = true
-  await ConnectionInstance.post('/followed/artist', {
+  await ConnectionInstance.post('/artist/follow', {
     artistId: artistId.value
   })
 }
 
 const handleUnFollowArtist = async () => {
   isFollowed.value = false
-  await ConnectionInstance.post('/unFollowed/artist', {
+  await ConnectionInstance.post('/artist/unfollow', {
     artistId: artistId.value
   })
 }
