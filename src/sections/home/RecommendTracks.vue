@@ -15,6 +15,7 @@
       :id="item.id"
       :artist_name="item.artists.map((artist) => ({ id: artist.id, name: artist.name }))"
       :showArtist="true"
+      :url="item.external_urls.spotify"
     />
   </div>
 </template>
@@ -24,59 +25,22 @@ import HeadingSection from '../../components/HeadingSection.vue'
 import ConnectionInstance from '../../api/main'
 import { ref, onMounted } from 'vue'
 import TrackPlay from '../../components/TrackPlay.vue'
+import { CommonType, ExtendsInformation, ImageType } from '../../typing/common'
 
-interface Short_ArtistType {
-  external_urls: {
-    spotify: string
-  }
-  href: string
-  id: string
-  name: string
-  type: string
-  uri: string
-}
-
-interface RecommendTrackType {
-  href: string
-  id: string
-  is_local: boolean
-  name: string
+interface RecommendTrackType extends CommonType, ExtendsInformation {
   popularity: number
-  preview_url: string
-  track_number: number
-  type: string
-  uri: string
-  disc_number: number
-  duration_ms: number
-  explicit: boolean
-  available_markets: string[]
   external_ids: {
     isrc: string
   }
-  external_urls: {
-    spotify: string
-  }
-  artists: Short_ArtistType[]
-  album: {
-    id: string
+  artists: CommonType[]
+  album: CommonType & {
+    images: ImageType[]
+    artists: CommonType[]
     album_type: string
-    artists: Short_ArtistType[]
     available_markets: string[]
-    external_urls: {
-      spotify: string
-    }
-    href: string
-    images: {
-      height: number
-      url: string
-      width: number
-    }[]
-    name: string
     release_date: string
     release_date_precision: string
     total_tracks: number
-    type: string
-    uri: string
   }
 }
 

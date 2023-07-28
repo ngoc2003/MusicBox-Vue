@@ -16,18 +16,13 @@ import { ref } from 'vue'
 import ConnectionInstance from '../api/main'
 import { useRouter } from 'vue-router'
 import CardInformation from '../components/CardInformation.vue'
+import { ImageType } from '../typing/common'
 
 const router = useRouter()
 
 interface CategoryType {
   href: string
-  icons: [
-    {
-      height: number
-      url: string
-      width: 275
-    }
-  ]
+  icons: ImageType[]
   id: string
   name: string
 }

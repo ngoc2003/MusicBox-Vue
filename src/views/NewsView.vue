@@ -18,29 +18,15 @@ import { useRouter } from 'vue-router'
 import ConnectionInstance from '../api/main'
 import HeadingSection from '../components/HeadingSection.vue'
 import CardInformation from '../components/CardInformation.vue'
+import { AlbumType } from '../typing/common'
 
 const router = useRouter()
 
-interface TopTracksType {
-  collaborative: boolean
-  description: string
-  external_urls: {
-    spotify: string
-  }
-  href: string
-  id: string
-  images: { height: number | null; width: number | null; url: string }[]
-  name: string
-  owner: { display_name: string; external_urls: { spotify: string } }
-  primary_color: null
-  public: null
-  snapshot_id: string
+interface NewReleaseAlbumType extends AlbumType {
   tracks: { href: string; total: number }
-  type: string
-  uri: string
 }
 
-const data = ref<TopTracksType[]>([])
+const data = ref<NewReleaseAlbumType[]>([])
 
 const handleFetchData = async () => {
   const response = await ConnectionInstance.get('/new-release', {

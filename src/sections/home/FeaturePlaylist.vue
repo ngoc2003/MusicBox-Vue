@@ -19,38 +19,15 @@ import CardInformation from '../../components/CardInformation.vue'
 import ConnectionInstance from '../../api/main'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { AlbumType, CommonType } from '../../typing/common'
+
+interface FeaturePlaylistType extends Omit<AlbumType, 'owner'>, CommonType {
+  owner: CommonType
+  tracks: { href: string; total: number }
+}
 
 const router = useRouter()
 
-interface FeaturePlaylistType {
-  collaborative: boolean
-  description: string
-  external_urls: { spotify: string }
-  href: string
-  id: string
-  images: [
-    {
-      height: number | null
-      url: string
-      width: number | null
-    }
-  ]
-  name: string
-  owner: {
-    display_name: string
-    external_urls: { spotify: string }
-    href: string
-    id: string
-    type: string
-    uri: string
-  }
-  primary_color: null
-  public: null
-  snapshot_id: string
-  tracks: { href: string; total: number }
-  type: string
-  uri: string
-}
 const data = ref<FeaturePlaylistType[]>([])
 
 onMounted(async () => {

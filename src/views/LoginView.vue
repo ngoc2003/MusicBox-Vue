@@ -13,11 +13,15 @@
 <script setup lang="ts">
 import ConnectionInstance from '../api/main'
 import { useUserStore } from '../stores/user'
+import { useSavedTrackListStore } from '../stores/savedTrackList'
+import { CommonType, ImageType, TrackType } from '../typing/common'
 
 const user = useUserStore()
+const savedTrackList = useSavedTrackListStore()
 
-window.onbeforeunload = function () {
-  console.log('Page is being unloaded')
+interface SavedTrackListType {
+  added_at: Date
+  track: TrackType[]
 }
 
 const handleLogin = () => {
@@ -31,6 +35,10 @@ const handleLogin = () => {
     window.addEventListener('message', (event) => {
       if (event.source === popup) {
         user.updateUser(event.data)
+        ConnectionInstance.get('/save/track').then((response) => {
+          console.log(response.data)
+          savedTrackList.updateSavedTrackList(response.data)
+        })
       }
     })
   })

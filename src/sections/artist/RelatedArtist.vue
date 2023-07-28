@@ -19,6 +19,7 @@ import ConnectionInstance from '../../api/main'
 import CardInformation from '../../components/CardInformation.vue'
 import { ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { CommonType, ImageType } from '../../typing/common'
 
 const router = useRouter()
 
@@ -26,26 +27,14 @@ const route = useRoute()
 
 const artistId = ref<string>('')
 
-interface RecommendArtistType {
-  external_urls: {
-    spotify: string
-  }
+interface RecommendArtistType extends CommonType {
   followers: {
     href: string | null
     total: number
   }
   genres: string[]
-  href: string
-  id: string
-  images: {
-    height: number
-    url: string
-    width: number
-  }[]
-  name: string
+  images: ImageType[]
   popularity: number
-  type: string
-  uri: string // "spotify:artist:code"
 }
 const data = ref<RecommendArtistType[]>([])
 

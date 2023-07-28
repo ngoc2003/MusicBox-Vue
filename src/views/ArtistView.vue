@@ -42,6 +42,7 @@
         :preview_url="item.preview_url"
         :id="item.id"
         :artist_name="item.artists.map((artist) => ({ id: artist.id, name: artist.name }))"
+        :url="item.external_urls.spotify"
       />
     </div>
   </div>
@@ -54,59 +55,30 @@ import ConnectionInstance from '../api/main'
 import TrackPlay from '../components/TrackPlay.vue'
 import RelatedArtistView from '../sections/artist/RelatedArtist.vue'
 import { ref, watch, onMounted } from 'vue'
-
+import { CommonType, ImageType, ExtendsInformation } from '../typing/common'
 const route = useRoute()
 const artistId = ref<string>('')
 const isFollowed = ref<boolean>(false)
 
-interface Artist {
+interface Artist extends CommonType {
+  images: ImageType[]
+
   isFollowed: boolean
-  external_urls: { spotify: string }
   spotify: string
   followers: { href: null; total: number }
   genres: string[] // the loai
-  href: string
-  id: string
-  images: { height: number; url: string; width: number }[]
-  name: string
   popularity: 44
-  type: string
-  uri: string
 }
 
-interface TrackType {
-  artists: {
-    external_urls: {
-      spotify: string
-    }
-    href: string
-    id: string
-    name: string
-    type: string
-    uri: string
-  }[]
-  available_markets: string[]
-  disc_number: number
-  duration_ms: number
-  explicit: boolean
-  external_urls: {
-    spotify: string
-  }
-  href: string
-  id: string
-  is_local: boolean
-  name: string
-  preview_url: string
-  track_number: 11
-  type: string
-  uri: string
-  //   uri: 'spotify:track:45MHwM7Bw9zHe0iKVBvoHB'
+interface TrackType extends CommonType, ExtendsInformation {
+  artists: CommonType[]
 }
 
 interface Data {
   artist: Artist
   album: TrackType[]
 }
+
 const data = ref<Data | null>(null)
 
 const handleFetchData = async () => {

@@ -7,7 +7,19 @@
         : 'hover:bg-opacity-20 hover:bg-primary'
     "
   >
-    <p class="w-4">{{ props.index }}</p>
+    <p class="w-6 h-full relative">
+      <HeartOutlineIcon
+        class="opacity-0 z-20 group-hover:opacity-100 duration-100 absolute -ml-1"
+        @click="handleLikeTrack"
+      />
+      <HeartIcon
+        class="opacity-0 z-20 group-hover:opacity-100 duration-100 absolute -ml-1"
+        @click="handleUnlikeTrack"
+      />
+      <span class="group-hover:opacity-0 z-10 duration-100">
+        {{ props.index }}
+      </span>
+    </p>
     <div class="flex items-center flex-1">
       <img
         v-if="props.preview_image"
@@ -44,6 +56,8 @@ import { intervalToDuration } from 'date-fns'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTrackStore } from '../stores/track'
+import HeartIcon from 'vue-material-design-icons/Heart.vue'
+import HeartOutlineIcon from 'vue-material-design-icons/HeartOutline.vue'
 
 interface Props {
   index: number
@@ -57,6 +71,7 @@ interface Props {
     id: string
   }[]
   showArtist?: boolean
+  url: string
 }
 
 const router = useRouter()
@@ -65,10 +80,16 @@ const track = useTrackStore()
 const handleActiveTrack = () => {
   track.updateTrack({
     preview_song: props.preview_url,
+    preview_image: props?.preview_image || '',
     name: props.name,
-    id: props.id
+    id: props.id,
+    url: props.url,
+    author: props.artist_name
   })
 }
+
+const handleLikeTrack = () => {}
+const handleUnlikeTrack = () => {}
 
 const props = defineProps<Props>()
 

@@ -27,27 +27,20 @@
 import { ref } from 'vue'
 import ConnectionInstance from '../api/main'
 import { useRoute, useRouter } from 'vue-router'
+import { CommonType, ImageType } from '../typing/common'
 
 const router = useRouter()
 const route = useRoute()
 
-interface CategoryDetailType {
+interface CategoryDetailType extends CommonType {
+  images: ImageType[]
   collaborative: boolean
   description: string
-  external_urls: {
-    spotify: string
-  }
-  href: string
-  id: string
-  images: { height: number | null; width: number | null; url: string }[]
-  name: string
   owner: { display_name: string; external_urls: { spotify: string } }
   primary_color: null
   public: null
   snapshot_id: string
   tracks: { href: string; total: number }
-  type: string
-  uri: string
 }
 
 const data = ref<CategoryDetailType[] | null>(null)

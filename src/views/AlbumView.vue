@@ -12,6 +12,7 @@
     :id="item.id"
     :artist_name="item.artists.map((artist) => ({ id: artist.id, name: artist.name }))"
     :showArtist="true"
+    :url="item.external_urls.spotify"
   />
 </template>
 
@@ -20,32 +21,11 @@ import { ref } from 'vue'
 import ConnectionInstance from '../api/main'
 import { useRoute } from 'vue-router'
 import TrackPlay from '../components/TrackPlay.vue'
+import { CommonType, ExtendsInformation } from '../typing/common'
 
-interface AlbumTrackType {
-  artists: [
-    {
-      external_urls: { spotify: string }
-      href: string
-      id: string
-      name: string
-      type: string
-      uri: string
-    }
-  ]
-  available_markets: string[]
-  disc_number: number
-  duration_ms: number
-  explicit: boolean
-  external_urls: { spotify: string }
-  href: string
-  id: string
-  is_local: boolean
-  name: string
-  preview_url: string
-  track_number: number
-  type: string
-  uri: string
-}
+interface AlbumTrackType extends CommonType, ExtendsInformation {
+  artists: CommonType[]}
+
 const route = useRoute()
 const data = ref<AlbumTrackType[] | null>(null)
 

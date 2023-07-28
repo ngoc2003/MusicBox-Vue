@@ -21,70 +21,97 @@
       :loop="isRepeat"
       :autoPlay="false"
     ></audio>
-    <div class="inline-grid grid-cols-5 gap-5 place-items-center wrapper">
-      <ShuffleIcon
-        :size="28"
-        :class="{
-          'text-primary': isSuffle,
-          'pointer-events-none': !track.track.name
-        }"
-        @click="handleToggleShuffle"
-      />
-      <SkipPreviousIcon :size="28" :class="!track.track.name && 'pointer-events-none'" />
-      <PlayIcon
-        :size="32"
-        class="text-primary"
-        v-if="!isPlay"
-        @click="handlePlay"
-        :class="!track.track.name && 'pointer-events-none'"
-      />
-      <StopIcon
-        :size="32"
-        class="text-primary"
-        v-else
-        @click="handleStop"
-        :class="!track.track.name && 'pointer-events-none'"
-      />
-      <SkipNextIcon :size="28" :class="!track.track.name && 'pointer-events-none'" />
-      <ReplayIcon
-        :size="28"
-        class="duration-300"
-        :class="{
-          'text-primary -rotate-180': isRepeat,
-          'pointer-events-none': !track.track.name
-        }"
-        @click="handleToggleRepeat"
-      />
+    <div class="flex px-8">
+      <div class="flex-1 flex items-center">
+        <div class="w-14 h-14 rounded-sm overflow-hidden">
+          <img
+            :src="track.track.preview_image"
+            v-if="track.track.preview_image"
+            class="object-cover"
+          />
+        </div>
+        <div class="text-left ml-3">
+          <p class="text-sm">{{ track.track.name }}</p>
+          <p>
+            <span
+              class="text-sm text-grey hover:text-primary cursor-pointer hover:underline"
+              @click="() => router.push(`/artist/${author.id}`)"
+              v-for="(author, index) in track.track.author"
+              :key="author.name"
+              >{{ author.name }} {{ index !== track.track.author.length - 1 ? ', ' : '' }}</span
+            >
+          </p>
+        </div>
+      </div>
+      <div class="flex-2 inline-grid grid-cols-3 gap-5 place-items-center wrapper">
+        <OpenInNewIcon
+          :size="22"
+          class="duration-300"
+          :class="{
+            'text-primary -rotate-180': isRepeat,
+            'pointer-events-none': !track.track.name
+          }"
+          @click="handleOpenTrackInSpotify"
+        />
+        <PlayIcon
+          :size="36"
+          class="text-primary"
+          v-if="!isPlay"
+          @click="handlePlay"
+          :class="!track.track.name && 'pointer-events-none'"
+        />
+        <StopIcon
+          :size="36"
+          class="text-primary"
+          v-else
+          @click="handleStop"
+          :class="!track.track.name && 'pointer-events-none'"
+        />
+        <ReplayIcon
+          :size="22"
+          class="duration-300"
+          :class="{
+            'text-primary -rotate-180': isRepeat,
+            'pointer-events-none': !track.track.name
+          }"
+          @click="handleToggleRepeat"
+        />
+      </div>
+      <div class="flex-1"></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import PlayIcon from 'vue-material-design-icons/Play.vue'
-import SkipPreviousIcon from 'vue-material-design-icons/SkipPrevious.vue'
-import SkipNextIcon from 'vue-material-design-icons/SkipNext.vue'
 import ReplayIcon from 'vue-material-design-icons/Replay.vue'
-import ShuffleIcon from 'vue-material-design-icons/Shuffle.vue'
 import StopIcon from 'vue-material-design-icons/Stop.vue'
+import OpenInNewIcon from 'vue-material-design-icons/OpenInNew.vue'
 import { ref, watch, reactive } from 'vue'
 import { useTrackStore } from '../stores/track'
+import { useRouter } from 'vue-router'
 
 interface AudioInfoType {
   duration: number
   currentTime: number
 }
 
+const router = useRouter()
+
 const track = useTrackStore()
 const audioRef = ref<HTMLAudioElement | null>(null)
 
 const isPlay = ref<boolean>(false)
 const isRepeat = ref<boolean>(false)
-const isSuffle = ref<boolean>(false)
 
 const audioInfo = reactive<AudioInfoType>({
   duration: 0,
   currentTime: 0
 })
+
+const handleOpenTrackInSpotify = () => {
+  window.open(track.track.url, '_blank')
+}
 
 const handlePlay = () => {
   isPlay.value = true
@@ -98,10 +125,6 @@ const handleStop = () => {
 
 const handleToggleRepeat = () => {
   isRepeat.value = !isRepeat.value
-}
-
-const handleToggleShuffle = () => {
-  isSuffle.value = !isSuffle.value
 }
 
 const onTimeUpdateCapture = () => {

@@ -38,30 +38,20 @@ import HeadingSection from '../../components/HeadingSection.vue'
 import ConnectionInstance from '../../api/main'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { CommonType, ImageType } from '../../typing/common'
 
-const router = useRouter()
-
-interface RecommendArtistType {
-  external_urls: {
-    spotify: string
-  }
+interface RecommendArtistType extends CommonType {
+  images: ImageType[]
   followers: {
     href: string | null
     total: number
   }
   genres: string[]
-  href: string
-  id: string
-  images: {
-    height: number
-    url: string
-    width: number
-  }[]
-  name: string
   popularity: number
-  type: string
-  uri: string // "spotify:artist:code"
 }
+
+const router = useRouter()
+
 const data = ref<RecommendArtistType[]>([])
 
 onMounted(async () => {
