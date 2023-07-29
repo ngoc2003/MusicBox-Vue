@@ -2,7 +2,7 @@ body {
   @apply bg-dark-main text-white font-normal;
 }
 .wrapper {
-  @apply p-8;
+  @apply p-2 sm:p-4 md:p-6 lg:p-8;
 }
 * {
   scrollbar-width: thin;

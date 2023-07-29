@@ -1,9 +1,12 @@
 <template>
   <div class="grid place-items-center h-screen">
     <div class="flex flex-col items-center">
-      <img class="w-40 rotate-6" src="../assets/logo.svg" alt="" />
-      <p class="text-3xl font-semibold my-10">Welcome to Musicbox</p>
-      <button @click="handleLogin" class="text-lg p-4 bg-primary rounded-[99px] font-semibold">
+      <img class="w-32 md:w-40 rotate-6" src="../assets/logo.svg" alt="" />
+      <p class="text-2xl md:text-3xl font-semibold my-6 md:my-10">Welcome to Musicbox</p>
+      <button
+        @click="handleLogin"
+        class="text-base md:text-lg p-4 bg-primary rounded-[99px] font-semibold"
+      >
         Sign in with Spotify
       </button>
     </div>

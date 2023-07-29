@@ -3,7 +3,7 @@
 
   <div v-if="!data.length"></div>
 
-  <div v-else class="grid grid-cols-2 gap-x-4">
+  <div v-else class="grid xl:grid-cols-2 gap-x-4">
     <TrackPlay
       v-for="(item, index) in data"
       :key="item.id"

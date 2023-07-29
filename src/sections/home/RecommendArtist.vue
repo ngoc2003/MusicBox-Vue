@@ -2,7 +2,7 @@
   <HeadingSection :title="'Recommend artist'" />
 
   <div v-if="!data?.length"></div>
-  <div v-else class="grid grid-cols-3 gap-5">
+  <div v-else class="grid lg:grid-cols-2 xxl:grid-cols-3 gap-5">
     <div
       v-for="item in data"
       :key="item.id"
@@ -22,7 +22,7 @@
           />
         </div>
         <div class="flex-1 bg-dark-light px-5 flex items-center">
-          <h1 class="font-semibold">
+          <h1 class="font-semibold text-sm">
             {{ item.name }}
           </h1>
         </div>

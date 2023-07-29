@@ -1,19 +1,19 @@
 <template>
   <div
-    class="flex w-full rounded-sm items-center mb-4 py-3 px-6 cursor-pointer text-grey text-sm group duration-200"
+    class="flex w-full rounded-sm items-center mb-4 py-2 md:py-3 px-3 md:px-6 cursor-pointer text-grey text-sm group duration-200"
     :class="
       track.track.id === props.id
         ? 'bg-primary bg-opacity-70 text-white'
         : 'hover:bg-opacity-20 hover:bg-primary'
     "
   >
-    <p class="w-6 h-full relative">
+    <p class="w-4 sm:w-6 h-full relative">
       <HeartOutlineIcon
-        class="opacity-0 z-20 group-hover:opacity-100 duration-100 absolute -ml-1"
+        class="opacity-0 z-20 group-hover:opacity-100 duration-100 absolute -mt-1 -ml-1"
         @click="handleLikeTrack"
       />
       <HeartIcon
-        class="opacity-0 z-20 group-hover:opacity-100 duration-100 absolute -ml-1"
+        class="opacity-0 z-20 group-hover:opacity-100 duration-100 absolute -mt-1 -ml-1"
         @click="handleUnlikeTrack"
       />
       <span class="group-hover:opacity-0 z-10 duration-100">
@@ -28,11 +28,11 @@
         class="ml-4 w-10 h-10 object-cover rounded-sm"
         alt=""
       />
-      <h1 class="ml-4 text-white flex-1">
+      <h1 class="ml-4 text-white flex-1 text-xs sm:text-sm">
         <p @click="handleActiveTrack">
           {{ props.name }}
         </p>
-        <p class="text-grey text-sm">
+        <p class="text-grey text-xs sm:text-sm">
           <span
             v-for="(artist, index) in props.artist_name"
             :key="artist.id"
@@ -45,7 +45,7 @@
         </p>
       </h1>
     </div>
-    <p>
+    <p class="text-xs sm:text-sm">
       {{ time }}
     </p>
   </div>

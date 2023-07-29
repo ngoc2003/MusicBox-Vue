@@ -1,7 +1,7 @@
 <template>
-  <header class="h-full bg-dark-light wrapper min-w-[280px]">
+  <header class="h-full bg-dark-light py-8 lg:wrapper lg:min-w-[280px]">
     <div class="px-4">
-      <span class="flex items-end cursor-pointer" @click="router.push('/')">
+      <span class="items-end cursor-pointer hidden lg:flex" @click="router.push('/')">
         <img src="../assets/logo.svg" alt="" class="mr-2 rotate-6" />
         <span class="text-lg font-semibold text-primary">Musicbox</span>
       </span>
@@ -11,29 +11,14 @@
           :class="{
             'text-primary': route.path === item.path
           }"
-          class="flex py-4 hover:text-primary cursor-pointer duration-100 rounded-lg font-semibold"
+          class="flex py-4 hover:text-primary cursor-pointer duration-100 rounded-lg font-semibold justify-center lg:justify-start"
           v-for="item in NavList"
           :key="item.title"
         >
           <component :is="item.icon"></component>
-          <span class="ml-4">
+          <span class="ml-4 hidden lg:block">
             {{ item.title }}
           </span>
-        </RouterLink>
-      </div>
-
-      <div class="mt-8 text-white">
-        <p class="uppercase text-grey text-xs">Your music</p>
-        <RouterLink
-          class="block py-4 hover:text-primary cursor-pointer duration-100 font-semibold"
-          :class="{
-            'text-primary': route.path === item.path
-          }"
-          :to="item.path"
-          v-for="item in MyMusicList"
-          :key="item.title"
-        >
-          <span>{{ item.title }}</span>
         </RouterLink>
       </div>
     </div>

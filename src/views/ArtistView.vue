@@ -1,16 +1,16 @@
 <template>
   <div v-if="!data"></div>
   <div v-else>
-    <div class="flex items-end my-10">
-      <div class="w-[200px] rounded-md overflow-hidden">
+    <div class="sm:flex items-end my-10">
+      <div class="sm:w-[120px] md:w-[200px] rounded-md overflow-hidden mb-4 sm:mb-0">
         <img :src="data.artist.images[0].url" alt="" />
       </div>
-      <div class="px-4">
-        <p class="text-sm mb-3 text-grey capitalize">
+      <div class="px-4 text-center sm:text-left">
+        <p class="text-xs md:text-sm mb-1 md:mb-3 text-grey capitalize">
           {{ data.artist.type }}
         </p>
-        <p class="text-6xl font-bold mb-4">{{ data.artist.name }}</p>
-        <p class="text-sm mb-3 text-grey">
+        <p class="text-4xl md:text-6xl font-bold mb-1 md:mb-4">{{ data.artist.name }}</p>
+        <p class="text-xs md:text-sm mb-3 text-grey">
           <span class="text-primary">
             {{ data.artist.followers.total }}
           </span>

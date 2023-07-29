@@ -3,19 +3,19 @@
     <div v-if="!data"></div>
 
     <div v-else>
-      <div class="flex items-end">
-        <div class="w-[200px] rounded-md overflow-hidden">
+      <div class="sm:flex items-end">
+        <div class="sm:w-[120px] md:w-[200px] rounded-md overflow-hidden mb-4 sm:mb-0">
           <img :src="data.images[0].url" alt="" />
         </div>
-        <div class="px-4">
-          <p class="text-6xl font-bold mb-4">{{ data.name }}</p>
-          <p class="text-sm mb-3 text-grey">
+        <div class="px-4 text-center sm:text-left">
+          <p class="text-4xl md:text-6xl font-bold mb-1 md:mb-3">{{ data.name }}</p>
+          <p class="text-xs md:text-sm mb-1 md:mb-3 text-grey">
             <span class="text-primary">
               {{ data.followers.total }}
             </span>
             followers
           </p>
-          <p>{{ data.description }}</p>
+          <p class="text-xs md:text-sm">{{ data.description }}</p>
         </div>
       </div>
       <div class="mt-10 py-4 border-t border-t-dark-light">

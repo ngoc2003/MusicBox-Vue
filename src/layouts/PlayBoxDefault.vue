@@ -21,9 +21,9 @@
       :loop="isRepeat"
       :autoPlay="false"
     ></audio>
-    <div class="flex px-8">
+    <div class="flex py-1 px-2 sm:px-4 md:px-8">
       <div class="flex-1 flex items-center">
-        <div class="w-14 h-14 rounded-sm overflow-hidden">
+        <div class="w-10 h-10 md:w-14 md:h-14 rounded-sm overflow-hidden">
           <img
             :src="track.track.preview_image"
             v-if="track.track.preview_image"
@@ -31,10 +31,10 @@
           />
         </div>
         <div class="text-left ml-3">
-          <p class="text-sm">{{ track.track.name }}</p>
+          <p class="text-xs sm:text-sm">{{ track.track.name }}</p>
           <p>
             <span
-              class="text-sm text-grey hover:text-primary cursor-pointer hover:underline"
+              class="text-xs sm:text-sm text-grey hover:text-primary cursor-pointer hover:underline"
               @click="() => router.push(`/artist/${author.id}`)"
               v-for="(author, index) in track.track.author"
               :key="author.name"
@@ -43,7 +43,9 @@
           </p>
         </div>
       </div>
-      <div class="flex-2 inline-grid grid-cols-3 gap-5 place-items-center wrapper">
+      <div
+        class="md:flex-2 inline-grid grid-cols-3 gap-1 sm:gap-2 md:gap-5 place-items-center wrapper"
+      >
         <OpenInNewIcon
           :size="22"
           class="duration-300"
@@ -77,7 +79,7 @@
           @click="handleToggleRepeat"
         />
       </div>
-      <div class="flex-1"></div>
+      <div class="hidden md:block flex-1"></div>
     </div>
   </div>
 </template>

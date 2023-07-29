@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex flex-col w-full">
-    <div class="flex overflow-hidden flex-1">
+    <div class="flex overflow-hidden flex-1 relative">
       <SideBarDefaultVue />
       <div class="flex-1 overflow-y-auto">
         <div class="wrapper">

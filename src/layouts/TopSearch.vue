@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!user.user.image"></div>
+  <div v-if="!user.user?.accessToken"></div>
   <div v-else class="flex items-center justify-between">
     <div class="border-b border-b-dark-light py-2 -mt-2 w-full max-w-[450px] flex items-center">
       <MagnifyIcon class="text-grey mr-2" />
